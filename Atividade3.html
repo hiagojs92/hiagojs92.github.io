@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 03 - Robotron</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        img {
+            width: 250px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Trocar a cor do Robotron</h1>
+
+    <button id="voltar"><</button>
+    <img id="robotron" src="img/robotron-azul.png">
+    <button id="avancar">></button>
+
+    <script>
+        // Lista das imagens dentro da pasta img/
+        const cores = [
+            "robotron-rosa.png",
+            "robotron-azul.png",
+            "robotron-amarelo.png",
+            "robotron-preto.png",
+            "robotron-vermelho.png",
+            "robotron-branco.png"
+        ];
+
+        let indice = 0;
+
+        const robo = document.getElementById("robotron");
+        const voltar = document.getElementById("voltar");
+        const avancar = document.getElementById("avancar");
+
+        avancar.addEventListener("click", () => {
+            indice++;
+            if (indice >= cores.length) indice = 0;
+            robo.src = "img/" + cores[indice];
+        });
+
+        voltar.addEventListener("click", () => {
+            indice--;
+            if (indice < 0) indice = cores.length - 1;
+            robo.src = "img/" + cores[indice];
+        });
+    </script>
+
+</body>
+</html>
