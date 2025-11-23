@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Robotron Futurista</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            background-color: #0a0f16;
+        }
+
+        /* PAINEL FUTURISTA */
+        .painel {
+            width: 330px;
+            height: 380px;
+            background-image: url("img/painel.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: auto;
+            padding-top: 35px;
+        }
+
+        /* TEXTOS */
+        .campo {
+            margin: 27px 0;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Área dos botões */
+        .controle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* Botões estilo futurista */
+        .btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            background: black;
+            color: white;
+            border: 3px solid #1fb7ff;
+        }
+
+        /* Número */
+        .valor {
+            width: 35px;
+            font-size: 23px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Robotron Futurista</h1>
+
+    <div class="painel">
+
+        <div class="campo">
+            <label>BRAÇOS</label>
+            <div class="controle">
+                <button class="btn" data-controle="bracos" data-op="-">-</button>
+                <span id="bracos" class="valor">00</span>
+                <button class="btn" data-controle="bracos" data-op="+">+</button>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>BLINDAGEM</label>
+            <div class="controle">
+                <button class="btn" data-controle="blindagem" data-op="-">-</button>
+                <span id="blindagem" class="valor">00</span>
+                <button class="btn" data-controle="blindagem" data-op="+">+</button>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>NÚCLEOS</label>
+            <div class="controle">
+                <button class="btn" data-controle="nucleos" data-op="-">-</button>
+                <span id="nucleos" class="valor">00</span>
+                <button class="btn" data-controle="nucleos" data-op="+">+</button>
+            </div>
+        </div>
+
+        <div class="campo">
+            <label>PERNAS</label>
+            <div class="controle">
+                <button class="btn" data-controle="pernas" data-op="-">-</button>
+                <span id="pernas" class="valor">00</span>
+                <button class="btn" data-controle="pernas" data-op="+">+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Função que atualiza os valores 0–10
+        const botoes = document.querySelectorAll(".btn");
+
+        botoes.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const id = btn.dataset.controle;
+                const op = btn.dataset.op;
+                const span = document.getElementById(id);
+
+                let valor = parseInt(span.textContent);
+
+                if (op === "+" && valor < 10) valor++;
+                if (op === "-" && valor > 0) valor--;
+
+                span.textContent = valor.toString().padStart(2, "0");
+            });
+        });
+    </script>
+
+</body>
+</html>
 
