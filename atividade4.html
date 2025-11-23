@@ -11,8 +11,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-
-            background-image: url("img/background.png"); /* coloque seu fundo */
+            background-image: url("img/background.png");
             background-size: cover;
             background-position: center;
         }
@@ -30,20 +29,16 @@
             width: 330px;
         }
 
-        /* PAINEL FUTURISTA */
+        /* ITENS DO PAINEL */
         .painel {
             width: 260px;
-            padding: 30px;
-
-            background-image: url("img/painel.png"); /* a imagem que você mandou */
-            background-size: cover;
-            background-position: center;
-
-            border-radius: 8px;
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 10px;
         }
 
         .item {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .item span {
@@ -52,7 +47,6 @@
             font-weight: bold;
             margin-bottom: 8px;
             color: white;
-            letter-spacing: 1px;
         }
 
         .controle {
@@ -92,48 +86,72 @@
             <img src="img/robotron.png" alt="Robotron">
         </div>
 
-        <!-- PAINEL FUTURISTA -->
+        <!-- PAINEL -->
         <div class="painel">
             
             <div class="item">
                 <span>BRAÇOS</span>
                 <div class="controle">
-                    <button class="btn">−</button>
+                    <button class="btn" data-op="menos">−</button>
                     <span class="valor">00</span>
-                    <button class="btn">+</button>
+                    <button class="btn" data-op="mais">+</button>
                 </div>
             </div>
 
             <div class="item">
                 <span>BLINDAGEM</span>
                 <div class="controle">
-                    <button class="btn">−</button>
+                    <button class="btn" data-op="menos">−</button>
                     <span class="valor">00</span>
-                    <button class="btn">+</button>
+                    <button class="btn" data-op="mais">+</button>
                 </div>
             </div>
 
             <div class="item">
                 <span>NÚCLEOS</span>
                 <div class="controle">
-                    <button class="btn">−</button>
+                    <button class="btn" data-op="menos">−</button>
                     <span class="valor">00</span>
-                    <button class="btn">+</button>
+                    <button class="btn" data-op="mais">+</button>
                 </div>
             </div>
 
             <div class="item">
                 <span>PERNAS</span>
                 <div class="controle">
-                    <button class="btn">−</button>
+                    <button class="btn" data-op="menos">−</button>
                     <span class="valor">00</span>
-                    <button class="btn">+</button>
+                    <button class="btn" data-op="mais">+</button>
                 </div>
             </div>
 
         </div>
 
     </div>
+
+    <script>
+        const botoes = document.querySelectorAll(".btn");
+
+        botoes.forEach(btn => {
+            btn.addEventListener("click", () => {
+
+                const operacao = btn.dataset.op;
+                const valorSpan = btn.parentElement.querySelector(".valor");
+
+                let numero = parseInt(valorSpan.textContent);
+
+                if (operacao === "mais" && numero < 10) {
+                    numero++;
+                }
+
+                if (operacao === "menos" && numero > 0) {
+                    numero--;
+                }
+
+                valorSpan.textContent = numero.toString().padStart(2, "0");
+            });
+        });
+    </script>
 
 </body>
 </html>
