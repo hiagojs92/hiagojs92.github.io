@@ -2,135 +2,138 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Robotron Futurista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotron</title>
 
     <style>
+
         body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-            background-color: #0a0f16;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+
+            background-image: url("img/background.png"); /* coloque seu fundo */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            height: 100vh;
+        }
+
+        /* IMAGEM DO ROBOTRON */
+        .robotron img {
+            width: 330px;
         }
 
         /* PAINEL FUTURISTA */
         .painel {
-            width: 330px;
-            height: 380px;
-            background-image: url("img/painel.png");
+            width: 260px;
+            padding: 30px;
+
+            background-image: url("img/painel.png"); /* a imagem que você mandou */
             background-size: cover;
-            background-repeat: no-repeat;
-            margin: auto;
-            padding-top: 35px;
+            background-position: center;
+
+            border-radius: 8px;
         }
 
-        /* TEXTOS */
-        .campo {
-            margin: 27px 0;
+        .item {
+            margin-bottom: 30px;
         }
 
-        .campo label {
+        .item span {
             display: block;
             font-size: 18px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
             font-weight: bold;
+            margin-bottom: 8px;
+            color: white;
             letter-spacing: 1px;
         }
 
-        /* Área dos botões */
         .controle {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 18px;
+            background: #000000c0;
+            padding: 8px 15px;
+            border-radius: 30px;
+            width: 100%;
         }
 
-        /* Botões estilo futurista */
         .btn {
-            width: 38px;
-            height: 38px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 22px;
-            font-weight: bold;
-            cursor: pointer;
             background: black;
+            border: 2px solid #00c8ff;
             color: white;
-            border: 3px solid #1fb7ff;
+            font-size: 20px;
+            cursor: pointer;
         }
 
-        /* Número */
         .valor {
-            width: 35px;
-            font-size: 23px;
-            font-weight: bold;
+            font-size: 22px;
+            color: white;
         }
+
     </style>
 </head>
 <body>
 
-    <h1>Robotron Futurista</h1>
+    <div class="container">
 
-    <div class="painel">
-
-        <div class="campo">
-            <label>BRAÇOS</label>
-            <div class="controle">
-                <button class="btn" data-controle="bracos" data-op="-">-</button>
-                <span id="bracos" class="valor">00</span>
-                <button class="btn" data-controle="bracos" data-op="+">+</button>
-            </div>
+        <!-- IMAGEM DO ROBOTRON -->
+        <div class="robotron">
+            <img src="img/robotron.png" alt="Robotron">
         </div>
 
-        <div class="campo">
-            <label>BLINDAGEM</label>
-            <div class="controle">
-                <button class="btn" data-controle="blindagem" data-op="-">-</button>
-                <span id="blindagem" class="valor">00</span>
-                <button class="btn" data-controle="blindagem" data-op="+">+</button>
+        <!-- PAINEL FUTURISTA -->
+        <div class="painel">
+            
+            <div class="item">
+                <span>BRAÇOS</span>
+                <div class="controle">
+                    <button class="btn">−</button>
+                    <span class="valor">00</span>
+                    <button class="btn">+</button>
+                </div>
             </div>
-        </div>
 
-        <div class="campo">
-            <label>NÚCLEOS</label>
-            <div class="controle">
-                <button class="btn" data-controle="nucleos" data-op="-">-</button>
-                <span id="nucleos" class="valor">00</span>
-                <button class="btn" data-controle="nucleos" data-op="+">+</button>
+            <div class="item">
+                <span>BLINDAGEM</span>
+                <div class="controle">
+                    <button class="btn">−</button>
+                    <span class="valor">00</span>
+                    <button class="btn">+</button>
+                </div>
             </div>
-        </div>
 
-        <div class="campo">
-            <label>PERNAS</label>
-            <div class="controle">
-                <button class="btn" data-controle="pernas" data-op="-">-</button>
-                <span id="pernas" class="valor">00</span>
-                <button class="btn" data-controle="pernas" data-op="+">+</button>
+            <div class="item">
+                <span>NÚCLEOS</span>
+                <div class="controle">
+                    <button class="btn">−</button>
+                    <span class="valor">00</span>
+                    <button class="btn">+</button>
+                </div>
             </div>
+
+            <div class="item">
+                <span>PERNAS</span>
+                <div class="controle">
+                    <button class="btn">−</button>
+                    <span class="valor">00</span>
+                    <button class="btn">+</button>
+                </div>
+            </div>
+
         </div>
 
     </div>
 
-    <script>
-        // Função que atualiza os valores 0–10
-        const botoes = document.querySelectorAll(".btn");
-
-        botoes.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const id = btn.dataset.controle;
-                const op = btn.dataset.op;
-                const span = document.getElementById(id);
-
-                let valor = parseInt(span.textContent);
-
-                if (op === "+" && valor < 10) valor++;
-                if (op === "-" && valor > 0) valor--;
-
-                span.textContent = valor.toString().padStart(2, "0");
-            });
-        });
-    </script>
-
 </body>
 </html>
-
