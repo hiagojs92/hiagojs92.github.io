@@ -9,10 +9,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-
-            /* Agora usando a imagem dentro da pasta img */
             background: url("img/fundo.jpg") center/cover no-repeat fixed;
-
             filter: brightness(1.35) saturate(0.5);
         }
 
@@ -139,12 +136,10 @@
         document.querySelectorAll(".btn").forEach(btn => {
             btn.onclick = () => {
                 const valor = btn.parentElement.querySelector(".valor");
-                let num = Number(valor.textContent);
-
-                if (btn.dataset.op === "mais" && num < 10) num++;
-                if (btn.dataset.op === "menos" && num > 0) num--;
-
-                valor.textContent = String(num).padStart(2, "0");
+                let n = Number(valor.textContent);
+                if (btn.dataset.op === "mais" && n < 10) n++;
+                if (btn.dataset.op === "menos" && n > 0) n--;
+                valor.textContent = String(n).padStart(2, "0");
             };
         });
     </script>
