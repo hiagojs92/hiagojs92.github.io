@@ -6,20 +6,52 @@
 
     <style>
         body {
-            font-family: Arial;
+            margin: 0;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 30px;
+
+            /* Fundo futurista suave */
+            background: url("img/fundo.jpg") center/cover no-repeat fixed;
+            filter: brightness(1.35) saturate(0.5);
+        }
+
+        /* Camada branca suave por cima do fundo */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: -1;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #003b5c;
+            text-shadow: 0 0 8px #ffffffaa;
         }
 
         img {
-            width: 250px;
+            width: 280px;
+            filter: drop-shadow(0 0 10px #0005);
         }
 
         button {
-            padding: 10px 20px;
-            margin: 20px;
-            font-size: 20px;
+            padding: 12px 24px;
+            margin: 30px 15px;
+            font-size: 22px;
             cursor: pointer;
+            border-radius: 10px;
+
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 2px solid #00c8ff;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.9);
         }
     </style>
 </head>
@@ -32,7 +64,6 @@
     <button id="avancar">></button>
 
     <script>
-        
         const cores = [
             "robotron-rosa.png",
             "robotron-azul.png",
@@ -48,17 +79,15 @@
         const voltar = document.getElementById("voltar");
         const avancar = document.getElementById("avancar");
 
-        avancar.addEventListener("click", () => {
-            indice++;
-            if (indice >= cores.length) indice = 0;
+        avancar.onclick = () => {
+            indice = (indice + 1) % cores.length;
             robo.src = "img/" + cores[indice];
-        });
+        };
 
-        voltar.addEventListener("click", () => {
-            indice--;
-            if (indice < 0) indice = cores.length - 1;
+        voltar.onclick = () => {
+            indice = (indice - 1 + cores.length) % cores.length;
             robo.src = "img/" + cores[indice];
-        });
+        };
     </script>
 
 </body>
