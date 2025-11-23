@@ -6,89 +6,74 @@
     <title>Robotron</title>
 
     <style>
-
         body {
             margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
-            background-image: url("img/background.png");
-            background-size: cover;
-            background-position: center;
+            background: url("img/background.png") center/cover;
         }
 
         .container {
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 60px;
-            height: 100vh;
         }
 
-        /* IMAGEM DO ROBOTRON */
-        .robotron img {
-            width: 330px;
-        }
+        .robotron img { width: 330px; }
 
-        /* ITENS DO PAINEL */
         .painel {
             width: 260px;
             padding: 20px;
-            background: rgba(0,0,0,0.5);
+            background: #0008;
             border-radius: 10px;
         }
 
-        .item {
-            margin-bottom: 25px;
-        }
-
+        .item { margin-bottom: 25px; }
         .item span {
-            display: block;
+            color: #fff;
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 8px;
-            color: white;
+            display: block;
         }
 
         .controle {
+            background: #000c;
+            padding: 8px 15px;
+            border-radius: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #000000c0;
-            padding: 8px 15px;
-            border-radius: 30px;
-            width: 100%;
         }
 
         .btn {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: black;
-            border: 2px solid #00c8ff;
-            color: white;
             font-size: 20px;
+            background: #000;
+            color: #fff;
+            border: 2px solid #00c8ff;
             cursor: pointer;
         }
 
         .valor {
+            color: #fff;
             font-size: 22px;
-            color: white;
         }
-
     </style>
 </head>
 <body>
 
     <div class="container">
-
-        <!-- IMAGEM DO ROBOTRON -->
         <div class="robotron">
             <img src="img/robotron.png" alt="Robotron">
         </div>
 
-        <!-- PAINEL -->
         <div class="painel">
-            
+
+            <!-- Estrutura repetida limpa -->
             <div class="item">
                 <span>BRAÇOS</span>
                 <div class="controle">
@@ -126,30 +111,19 @@
             </div>
 
         </div>
-
     </div>
 
     <script>
-        const botoes = document.querySelectorAll(".btn");
+        document.querySelectorAll(".btn").forEach(btn => {
+            btn.onclick = () => {
+                const valor = btn.parentElement.querySelector(".valor");
+                let num = Number(valor.textContent);
 
-        botoes.forEach(btn => {
-            btn.addEventListener("click", () => {
+                if (btn.dataset.op === "mais" && num < 10) num++;
+                if (btn.dataset.op === "menos" && num > 0) num--;
 
-                const operacao = btn.dataset.op;
-                const valorSpan = btn.parentElement.querySelector(".valor");
-
-                let numero = parseInt(valorSpan.textContent);
-
-                if (operacao === "mais" && numero < 10) {
-                    numero++;
-                }
-
-                if (operacao === "menos" && numero > 0) {
-                    numero--;
-                }
-
-                valorSpan.textContent = numero.toString().padStart(2, "0");
-            });
+                valor.textContent = String(num).padStart(2, "0");
+            };
         });
     </script>
 
