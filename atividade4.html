@@ -9,7 +9,22 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: url("img/background.png") center/cover;
+
+            /* Fundo original */
+            background: url("img/background.png") center/cover no-repeat fixed;
+
+            /* Clareamento do fundo */
+            filter: brightness(1.6) saturate(0.4);
+        }
+
+        /* Overlay suave branco + leve blur = sci-fi clean */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: -1;
         }
 
         .container {
@@ -18,18 +33,26 @@
             justify-content: center;
             align-items: center;
             gap: 60px;
+            z-index: 1;
+            position: relative;
         }
 
-        .robotron img { width: 330px; }
+        .robotron img {
+            width: 330px;
+            user-select: none;
+            pointer-events: none;
+        }
 
         .painel {
             width: 260px;
             padding: 20px;
-            background: #0008;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.55);
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
         }
 
         .item { margin-bottom: 25px; }
+
         .item span {
             color: #fff;
             font-size: 18px;
@@ -39,12 +62,13 @@
         }
 
         .controle {
-            background: #000c;
+            background: rgba(0, 0, 0, 0.65);
             padding: 8px 15px;
             border-radius: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 2px solid #00c8ff55;
         }
 
         .btn {
@@ -61,6 +85,7 @@
         .valor {
             color: #fff;
             font-size: 22px;
+            font-family: monospace;
         }
     </style>
 </head>
@@ -73,7 +98,7 @@
 
         <div class="painel">
 
-            <!-- Estrutura repetida limpa -->
+            <!-- BRAÇOS -->
             <div class="item">
                 <span>BRAÇOS</span>
                 <div class="controle">
@@ -83,6 +108,7 @@
                 </div>
             </div>
 
+            <!-- BLINDAGEM -->
             <div class="item">
                 <span>BLINDAGEM</span>
                 <div class="controle">
@@ -92,6 +118,7 @@
                 </div>
             </div>
 
+            <!-- NÚCLEOS -->
             <div class="item">
                 <span>NÚCLEOS</span>
                 <div class="controle">
@@ -101,6 +128,7 @@
                 </div>
             </div>
 
+            <!-- PERNAS -->
             <div class="item">
                 <span>PERNAS</span>
                 <div class="controle">
