@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Atividade 06</title>
+<style>
+body { font-family: Arial; display: flex; gap: 50px; padding: 20px; }
+section { width: 45%; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+td, th { border: 1px solid black; padding: 5px; }
+</style>
+</head>
+<body>
+
+<section>
+<h2>Extrato Bancário</h2>
+
+<label>Categoria:</label>
+<input type="text" id="categoria"><br><br>
+
+<label>Data:</label>
+<input type="date" id="data"><br><br>
+
+<label>Valor:</label>
+<input type="number" id="valor" step="0.01"><br><br>
+
+<button onclick="adicionar()">Adicionar</button>
+<button onclick="calcular()">Calcular</button>
+
+<table id="tabela">
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Data</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</section>
+
+<section>
+<h2>Resumo</h2>
+<div id="resumo"></div>
+</section>
+
+<script>
+let lista = [];
+
+function adicionar() {
+    let categoria = document.getElementById("categoria").value;
+    let data = document.getElementById("data").value;
+    let valor = document.getElementById("valor").value;
+
+    if (!categoria || !data || !valor) return;
+
+    lista.push({categoria, data, valor: parseFloat(valor)});
+
+    let tr = document.createElement("tr");
+    tr.innerHTML = `<td>${categoria}</td><td>${data}</td><td>${valor}</td>`;
+    document.querySelector("#tabela tbody").appendChild(tr);
+
+    document.getElementById("categoria").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("valor").value = "";
+}
+
+function calcular() {
+    let total = lista.reduce((s, g) => s + g.valor, 0);
+
+    function somaMes(m) {
+        return lista
+            .filter(g => g.data.split("-")[1] == m)
+            .reduce((soma, g) => soma + g.valor, 0);
+    }
+
+    let total03 = somaMes("03");
+    let total04 = somaMes("04");
+
+    document.getElementById("resumo").innerHTML = `
+        <p>Total: ${total.toFixed(2)}</p>
+        <p>Total no Mês 03: ${total03.toFixed(2)}</p>
+        <p>Total no Mês 04: ${total04.toFixed(2)}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
