@@ -1,0 +1,46 @@
+<!DOCTYPE html><html>
+<head>
+<meta charset="UTF-8">
+<title>Atividade 05</title>
+</head>
+<body>
+<h2>Escola Virtual</h2>
+<form id="form05">
+<input type="text" id="nome" placeholder="Nome" required><br>
+<input type="date" id="nascimento" required><br>
+<input type="text" id="mae" placeholder="Nome da Mãe" required><br>
+<input type="text" id="pai" placeholder="Nome do Pai"><br>
+<input type="text" id="ddd" placeholder="DDD" required><br>
+<input type="text" id="tel" placeholder="Telefone" required><br>
+<input type="email" id="email" placeholder="E-mail" required><br>
+<select id="turno" required>
+<option value="">Turno</option>
+<option>Manhã</option>
+<option>Tarde</option>
+</select><br>
+<label><input type="checkbox" name="ext" value="Música">Música</label>
+<label><input type="checkbox" name="ext" value="Balé">Balé</label>
+<label><input type="checkbox" name="ext" value="Judô">Judô</label>
+<label><input type="checkbox" name="ext" value="Futebol">Futebol</label><br>
+<button type="submit">Enviar</button>
+</form>
+<div id="msg"></div>
+<script>
+const ddds=["11","21","31","41","51","61","71","81","91"]
+document.getElementById("form05").addEventListener("submit",e=>{
+e.preventDefault()
+let nome=nome.value.trim()
+let nasc=nascimento.value
+let mae=mae.value.trim()
+let dddv=ddd.value
+let telv=tel.value.trim()
+let emailv=email.value.trim()
+let turno=turno.value
+let exts=[...document.querySelectorAll("input[name='ext']:checked")] 
+if(!nome||!nasc||!mae||!dddv||!telv||!emailv||!turno){msg.innerText="Erro: preencha todos os campos obrigatórios";return}
+if(!ddds.includes(dddv)){msg.innerText="Erro: DDD inválido";return}
+if(exts.length>3){msg.innerText="Erro: máximo 3 atividades";return}
+msg.innerText="Cadastro realizado com sucesso";
+})
+</script>
+</body>
