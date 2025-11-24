@@ -1,46 +1,108 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Atividade 05</title>
+<title>Escola Virtual</title>
+<style>
+body { font-family: Arial; width: 600px; margin: auto; }
+fieldset { margin-bottom: 20px; }
+</style>
 </head>
 <body>
-<h2>Escola Virtual</h2>
-<form id="form05">
-<input type="text" id="nome" placeholder="Nome" required><br>
-<input type="date" id="nascimento" required><br>
-<input type="text" id="mae" placeholder="Nome da Mãe" required><br>
-<input type="text" id="pai" placeholder="Nome do Pai"><br>
-<input type="text" id="ddd" placeholder="DDD" required><br>
-<input type="text" id="tel" placeholder="Telefone" required><br>
-<input type="email" id="email" placeholder="E-mail" required><br>
-<select id="turno" required>
-<option value="">Turno</option>
-<option>Manhã</option>
-<option>Tarde</option>
-</select><br>
-<label><input type="checkbox" name="ext" value="Música">Música</label>
-<label><input type="checkbox" name="ext" value="Balé">Balé</label>
-<label><input type="checkbox" name="ext" value="Judô">Judô</label>
-<label><input type="checkbox" name="ext" value="Futebol">Futebol</label><br>
-<button type="submit">Enviar</button>
+<h2 style="text-align:center;">Escola Virtual</h2>
+<h3 style="text-align:center;">Formulário de Pré-Matrícula</h3>
+
+<form id="form">
+<fieldset>
+<legend>Dados Pessoais:</legend>
+<label>Nome do Aluno:</label>
+<input type="text" id="nome"><br><br>
+
+<label>Nascimento (dd/mm/aaaa):</label>
+<input type="text" id="nascimento"><br><br>
+
+<label>Nome da Mãe:</label>
+<input type="text" id="mae"><br><br>
+
+<label>Nome do Pai:</label>
+<input type="text" id="pai"><br><br>
+
+<label>Telefone: DDD</label>
+<input type="text" id="ddd" size="3">
+<input type="text" id="telefone" size="10">
+<label>Ramal:</label>
+<input type="text" id="ramal" size="5"><br><br>
+
+<label>E-Mail:</label>
+<input type="text" id="email" size="25">
+</fieldset>
+
+<fieldset>
+<legend>Informações de Matrícula:</legend>
+
+<label>Série:</label>
+<select id="serie">
+<option>pré-escolar</option>
+<option>1º ano</option>
+<option>2º ano</option>
+</select><br><br>
+
+<label>Turno:</label>
+<input type="radio" name="turno" value="Manhã">Manhã
+<input type="radio" name="turno" value="Tarde">Tarde<br><br>
+
+<label>Atividades Extracurriculares:</label><br>
+<input type="checkbox" value="Música">Música<br>
+<input type="checkbox" value="Balé">Balé<br>
+<input type="checkbox" value="Judô">Judô<br>
+<input type="checkbox" value="Futebol">Futebol
+</fieldset>
+
+<button type="button" onclick="enviar()">Envie Formulário</button>
+<button type="reset">Limpa Campos</button>
 </form>
-<div id="msg"></div>
+
 <script>
-const ddds=["11","21","31","41","51","61","71","81","91"]
-document.getElementById("form05").addEventListener("submit",e=>{
-e.preventDefault()
-let nome=nome.value.trim()
-let nasc=nascimento.value
-let mae=mae.value.trim()
-let dddv=ddd.value
-let telv=tel.value.trim()
-let emailv=email.value.trim()
-let turno=turno.value
-let exts=[...document.querySelectorAll("input[name='ext']:checked")] 
-if(!nome||!nasc||!mae||!dddv||!telv||!emailv||!turno){msg.innerText="Erro: preencha todos os campos obrigatórios";return}
-if(!ddds.includes(dddv)){msg.innerText="Erro: DDD inválido";return}
-if(exts.length>3){msg.innerText="Erro: máximo 3 atividades";return}
-msg.innerText="Cadastro realizado com sucesso";
-})
+function enviar() {
+    let nome = document.getElementById("nome").value;
+    let nasc = document.getElementById("nascimento").value;
+    let mae = document.getElementById("mae").value;
+    let pai = document.getElementById("pai").value;
+    let ddd = document.getElementById("ddd").value;
+    let tel = document.getElementById("telefone").value;
+    let email = document.getElementById("email").value;
+
+    if (!nome || !nasc || !mae || !pai || !ddd || !tel || !email) {
+        alert("Erro: Preencha todos os campos obrigatórios.");
+        return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Erro: E-mail inválido.");
+        return;
+    }
+
+    let dddsValidos = ["11","21","31","41","51","61","71","81","91"];
+    if (!dddsValidos.includes(ddd)) {
+        alert("Erro: DDD inválido.");
+        return;
+    }
+
+    let atividades = document.querySelectorAll("input[type=checkbox]:checked");
+    if (atividades.length > 3) {
+        alert("Erro: Máximo de 3 atividades.");
+        return;
+    }
+
+    let nascTest = nasc.split("/");
+    if (nascTest.length !== 3 || nascTest[0].length !== 2 || nascTest[1].length !== 2 || nascTest[2].length !== 4) {
+        alert("Erro: Data de nascimento inválida.");
+        return;
+    }
+
+    alert("Cadastro realizado com sucesso!");
+}
 </script>
+
 </body>
+</html>
