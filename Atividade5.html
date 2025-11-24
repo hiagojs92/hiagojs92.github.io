@@ -61,7 +61,7 @@ fieldset { margin-bottom: 20px; }
 <button type="button" onclick="enviar()">Envie Formulário</button>
 <button type="reset">Limpa Campos</button>
 </form>
-
+    
 <script>
 function enviar() {
     let nome = document.getElementById("nome").value;
@@ -82,8 +82,10 @@ function enviar() {
         return;
     }
 
-    let dddsValidos = ["11","21","31","41","51","61","71","81","91"];
-    if (!dddsValidos.includes(ddd)) {
+    ddd = ddd.replace(/\D/g, "");
+    if (ddd.length > 2) ddd = ddd.slice(-2);
+
+    if (!/^\d{2}$/.test(ddd)) {
         alert("Erro: DDD inválido.");
         return;
     }
@@ -103,6 +105,3 @@ function enviar() {
     alert("Cadastro realizado com sucesso!");
 }
 </script>
-
-</body>
-</html>
